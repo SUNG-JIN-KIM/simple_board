@@ -17,8 +17,15 @@
 </div>
 <h2>💬 댓글</h2>
 <ul class="comment-list">
-
-
+    <li th:each="comment: ${post.comments}">
+        <div class="comment">
+            <p th:text="${comment.text}"></p>
+            <small>
+                by <span th:text="${comment.author.username}"></span>
+                at <span th:text="${#temporals.format(comment.createdAt, 'MM-dd HH:mm')}"></span>
+            </small>
+        </div>
+    </li>
 </ul>
 <form th:action="@{'/posts/' + ${post.id} + '/comments'}"
       th:object="${commentDto}" method="post" class="form-container" >
